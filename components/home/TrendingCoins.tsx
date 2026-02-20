@@ -4,6 +4,7 @@ import { TrendingUp, TrendingDown } from "lucide-react";
 import DataTable from "../DataTable";
 import Image from "next/image";
 import Link from "next/link";
+import { TrendingCoinsFallback } from "./fallback";
 
 const columns: DataTableColumn<TrendingCoin>[] = [
   {
@@ -55,11 +56,17 @@ const columns: DataTableColumn<TrendingCoin>[] = [
 ];
 
 const TrendingCoins = async () => {
-  const trendingCoins = await fetcher<{ coins: TrendingCoin[] }>(
-    "/search/trending",
-    undefined,
-    300,
-  );
+  let trendingCoins;
+  try {
+    trendingCoins = await fetcher<{ coins: TrendingCoin[] }>(
+      "/search/trending",
+      undefined,
+      300,
+    );
+  } catch (error) {
+    console.error("Error fetching trending coins: ", error);
+    return <TrendingCoinsFallback />;
+  }
   return (
     <div id="trending-coins">
       <h4>Trending Coins</h4>
