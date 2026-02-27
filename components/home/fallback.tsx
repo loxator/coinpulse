@@ -51,6 +51,57 @@ const trendingSkeletonColumns: DataTableColumn<{ id: number }>[] = [
   },
 ];
 
+const categoriesSkeletonColumns: DataTableColumn<{ id: number }>[] = [
+  {
+    header: "Category",
+    cellClassName: "category-cell",
+    cell: () => (
+      <div className="flex items-center">
+        <div className="h-3 w-32 rounded bg-dark-400 animate-pulse" />
+      </div>
+    ),
+  },
+  {
+    header: "Top Gainers",
+    cellClassName: "top-gainers-cell",
+    cell: () => (
+      <div className="flex items-center gap-2">
+        <div className="h-7 w-7 rounded-full bg-dark-400 animate-pulse" />
+        <div className="h-7 w-7 rounded-full bg-dark-400 animate-pulse" />
+        <div className="h-7 w-7 rounded-full bg-dark-400 animate-pulse" />
+      </div>
+    ),
+  },
+  {
+    header: "24h Change",
+    cellClassName: "change-header-cell",
+    cell: () => (
+      <div className="price-change flex items-center gap-2">
+        <div className="h-4 w-4 rounded-full bg-dark-400 animate-pulse" />
+        <div className="h-3 w-20 rounded bg-dark-400 animate-pulse" />
+      </div>
+    ),
+  },
+  {
+    header: "24h Volume",
+    cellClassName: "volume-cell",
+    cell: () => (
+      <div className="flex items-center">
+        <div className="h-3 w-24 rounded bg-dark-400 animate-pulse" />
+      </div>
+    ),
+  },
+  {
+    header: "Market Cap",
+    cellClassName: "market-cell",
+    cell: () => (
+      <div className="flex items-center">
+        <div className="h-3 w-24 rounded bg-dark-400 animate-pulse" />
+      </div>
+    ),
+  },
+];
+
 export function TrendingCoinsFallback() {
   return (
     <div id="trending-coins-fallback">
@@ -60,6 +111,22 @@ export function TrendingCoinsFallback() {
         data={SKELETON_ROWS}
         rowKey={(row) => row.id}
         tableClassName="trending-coins-table"
+        headerCellClassName="py-3!"
+        bodyCellClassName="py-2!"
+      />
+    </div>
+  );
+}
+
+export function CategoriesFallback() {
+  return (
+    <div id="categories-fallback" className="custom-scrollbar">
+      <h4>Top Categories</h4>
+      <DataTable
+        columns={categoriesSkeletonColumns}
+        data={SKELETON_ROWS}
+        rowKey={(row) => row.id}
+        tableClassName="mt-3"
         headerCellClassName="py-3!"
         bodyCellClassName="py-2!"
       />
