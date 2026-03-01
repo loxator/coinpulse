@@ -22,7 +22,7 @@ const header = () => {
           >
             Home
           </Link>
-          <p>Search Modal</p>
+          {/* <p>Search Modal</p> */}
           <Link
             href="/coins"
             className={cn("nav-link", {
